@@ -1,0 +1,28 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "composite": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "inlineSources": true,
+    "declarationMap": false,
+    "target": "ES2019",
+    "module": "commonjs",
+    "lib": [
+      "ES2019",
+      "DOM"
+    ],
+    "declaration": true,
+    "experimentalDecorators": false,
+    "moduleResolution": "node",
+    "noResolve": false,
+    "preserveSymlinks": true,
+    "listEmittedFiles": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}

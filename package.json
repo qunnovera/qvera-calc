@@ -1,0 +1,37 @@
+{
+  "name": "@sharadt/numfy",
+  "version": "0.1.2",
+  "main": "index.js",
+  "scripts": {
+    "build": "ts-node tools/build.ts",
+    "push": "ts-node tools/publish.ts",
+    "build:dev": "tsc -b",
+    "clean": "ts-node tools/clean.ts",
+    "test": "jest"
+  },
+  "author": "sharad <sharadtomer@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/sharadtomer/numfy",
+  "description": "Complete excel like formula engine",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.7.7",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "excel",
+    "calc",
+    "formula",
+    "formula parser",
+    "numfy",
+    "typescript"
+  ],
+  "dependencies": {
+    "@sharadt/lexicons": "^0.1.2"
+  }
+}

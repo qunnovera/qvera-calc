@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {},
+    "outDir": "../../dist/evaluator",
+  },
+  "references": [
+  ],
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "**/*.d.ts"
+  ]
+}
