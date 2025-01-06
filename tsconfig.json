@@ -6,6 +6,9 @@
     },
     {
       "path": "./src/parser",
+    },
+    {
+      "path": "./src/utils",
     }
   ],
   "compilerOptions": {
