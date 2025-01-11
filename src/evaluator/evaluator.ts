@@ -1,6 +1,6 @@
 import { IDataStore } from "./data-store.interface";
 import { CellRange, CellRef, ParserResult, TokenKind } from "../parser"
-import { isBoolean, isNumber } from "../utils/data-type.util";
+import { isBoolean, isNumber, isString } from "../utils/data-type.util";
 import { CalcError, ErrorKind } from "./calc-error";
 import { IFormulaManager } from "./formula-manager.interface";
 
@@ -32,6 +32,10 @@ export class ExpEvaluator {
       }
       // boolean
       case TokenKind.Boolean: {
+        return node.value;
+      }
+      // string
+      case TokenKind.String: {
         return node.value;
       }
       // number
@@ -129,12 +133,22 @@ export class ExpEvaluator {
       return res2;
     }
 
-    // convert bool to int
+    // convert bool/string to int
     if(isBoolean(res1)){
       res1 = +res1;
+    }else if(isString(res1)){
+      res1 = Number(res1);
+      if(isNaN(res1)){
+        return new CalcError(ErrorKind.Value);
+      }
     }
     if(isBoolean(res2)){
       res2 = +res2;
+    }else if(isString(res2)){
+      res2 = Number(res2);
+      if(isNaN(res2)){
+        return new CalcError(ErrorKind.Value);
+      }
     }
 
     // check data types
@@ -173,6 +187,13 @@ export class ExpEvaluator {
 
     if(isBoolean(res)){
       res = +res;
+    }else if(isString(res) && node.value == "+"){
+      return res;
+    }else if(isString(res)){
+      res = Number(res);
+      if(isNaN(res)){
+        return new CalcError(ErrorKind.Value);
+      }
     }
 
     if(!isNumber(res)){

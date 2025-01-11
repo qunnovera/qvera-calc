@@ -1,5 +1,5 @@
 import { CalcEngine } from "../../src/calc";
-import {CalcParser} from "../../src/parser/calc";
+import { CalcError, ErrorKind } from "../../src/evaluator";
 
 const calc = new CalcEngine();
 calc.dataStore.setVariableValue("a", 5);
@@ -41,5 +41,15 @@ describe("Test calc engine", () => {
     expect(calc.eval("3+false")).toBe(3);
   })
 
-
+  test("can  work with string values", () => {
+    expect(calc.eval('"abc"')).toBe("abc");
+    expect(calc.eval('"3" + 5')).toBe(8);
+    expect(calc.eval('"3" - 5')).toBe(-2);
+    expect(calc.eval('+"3"')).toBe("3");
+    expect(calc.eval('-"3"')).toBe(-3);
+    // error with string operations
+    let res = calc.eval('"a"-"3"')
+    expect(res instanceof CalcError).toBe(true);
+    expect(res.kind).toBe(ErrorKind.Value);
+  });
 });

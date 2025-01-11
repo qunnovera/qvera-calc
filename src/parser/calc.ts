@@ -5,6 +5,7 @@ import { CellRange, CellRef } from "./cell-range";
 import { Str } from "./util/str.parser";
 import { nestedEq } from "./util/nested-eq.parser";
 import { ManySept } from "./util/many-sept.parser";
+import { strValue } from "./util/str-value.parser";
 
 // letters
 const letters = lxp.StringParsers.alphabets;
@@ -21,9 +22,15 @@ const oSpace = lxp.StringParsers.Regex("\\s*");
 // boolean
 const bool = lxp.StringParsers.Regex("(true|false)", "i")
   .map(res => new ParserResult(
-    TokenKind.Boolean, 
+    TokenKind.Boolean,
     res.toLowerCase() === "true"
-    // res
+  ));
+
+// string values
+const strDataType = strValue
+  .map(res => new ParserResult(
+    TokenKind.String,
+    res
   ));
 
 // number
@@ -111,6 +118,7 @@ const formulaParser = lx.Sequence([
 ));
 
 const operand = lx.Choice([
+  strDataType,
   formulaParser,
   bool,
   cellRange,
@@ -125,7 +133,15 @@ const eq = lx.SeptBy(lx.Choice([
   operand,
   openParan,
   closeParan
-]), oSpace);
+]), oSpace).chain(res => {
+  return new lx.Parser((state) => {
+    if(state.index >= state.inputString.length){
+      return state;
+    }else {
+      return lx.StateUtils.withError(state, `Failed to parse complete input string`);
+    }
+  })
+});
 
 
 export class CalcParser {
