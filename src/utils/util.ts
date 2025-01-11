@@ -1,4 +1,9 @@
-export function indexToLetter(num: number){
+/**
+ * convert index value to equivalent letter
+ * @param num index to convert
+ * @returns equivalent letter
+ */
+export function indexToLetter(num: number): string{
   let ltr = "";
 
   if(num == 0){
@@ -14,7 +19,12 @@ export function indexToLetter(num: number){
   return ltr;
 }
 
-export function letterToIndex(ltr: string){
+/**
+ * convert letter to equivalent index
+ * @param ltr letter to convert
+ * @returns equivalent index
+ */
+export function letterToIndex(ltr: string): number{
   ltr = ltr.toUpperCase();
 
   let num = 0;
@@ -24,4 +34,32 @@ export function letterToIndex(ltr: string){
   }
 
   return num - 1;
+}
+
+/**
+ * get value from storage and fallback storage based on provided key
+ * and scope
+ */
+export function getScopedValue(key: string, scope: string, data: any): any {
+  let ds = data.default;
+  if(scope && data.scoped[scope]){
+    ds = data.scoped[scope];
+  }
+
+  return ds[key] || data.default[key];
+}
+
+/**
+ * set scoped value 
+ */
+export function setScopedValue(key: string, value: any, scope: string, data: any) {
+  if(scope){
+    if(!data.scoped[scope]) {
+      data.scoped[scope] = {};
+    }
+
+    data.scoped[scope][key] = value;
+  }else {
+    data.default[key] = value;
+  }
 }

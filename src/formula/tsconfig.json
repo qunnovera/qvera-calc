@@ -4,11 +4,14 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {},
-    "outDir": "../../dist/evaluator",
+    "outDir": "../../dist/formula",
   },
   "references": [
     {
       "path": "../parser",
+    },
+    {
+      "path": "../evaluator",
     },
     {
       "path": "../utils",

@@ -7,6 +7,18 @@
     "outDir": "../../dist/datastore",
   },
   "references": [
+    {
+      "path": "../parser",
+    },
+    {
+      "path": "../evaluator",
+    },
+    {
+      "path": "../utils",
+    },
+    {
+      "path": "../formula",
+    }
   ],
   "include": [
     "**/*.ts"

@@ -9,6 +9,12 @@
     },
     {
       "path": "./src/utils",
+    },
+    {
+      "path": "./src/evaluator",
+    },
+    {
+      "path": "./src/formula",
     }
   ],
   "compilerOptions": {
