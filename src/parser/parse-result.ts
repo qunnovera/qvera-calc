@@ -1,6 +1,7 @@
 export enum TokenKind {
   None,
   Integer,
+  Boolean,
   Float,
   VarName,
   CellRef,

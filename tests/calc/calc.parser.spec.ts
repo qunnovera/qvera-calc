@@ -83,4 +83,27 @@ describe("Test calc parser", () => {
     expect(res.result.childs[1].childs[2].childs[0].value).toBe('-');
   });
 
+  test("can parse boolean values", () => {
+    let res = CalcParser.instance.run("true");
+    expect(res.isError).toBe(false);
+    expect(res.result.kind).toBe(TokenKind.Boolean);
+    expect(res.result.value).toBe(true);
+
+    res = CalcParser.instance.run("True");
+    expect(res.isError).toBe(false);
+    expect(res.result.kind).toBe(TokenKind.Boolean);
+    expect(res.result.value).toBe(true);
+
+    res = CalcParser.instance.run("false");
+    expect(res.isError).toBe(false);
+    expect(res.result.kind).toBe(TokenKind.Boolean);
+    expect(res.result.value).toBe(false);
+
+    res = CalcParser.instance.run("False");
+    expect(res.isError).toBe(false);
+    expect(res.result.kind).toBe(TokenKind.Boolean);
+    expect(res.result.value).toBe(false);
+  });
+
+
 });

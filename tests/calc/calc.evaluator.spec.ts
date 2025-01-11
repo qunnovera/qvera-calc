@@ -33,4 +33,13 @@ describe("Test calc engine", () => {
     expect(res).toBe(28);
   });
 
+  test("can work with boolean values", () => {
+    expect(calc.eval("true + false")).toBe(1);
+    expect(calc.eval("-true")).toBe(-1);
+    expect(calc.eval("3-true")).toBe(2);
+    expect(calc.eval("3/true")).toBe(3);
+    expect(calc.eval("3+false")).toBe(3);
+  })
+
+
 });

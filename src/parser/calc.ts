@@ -18,6 +18,14 @@ const space = lxp.StringParsers.Regex("\\s+");
 // optional space
 const oSpace = lxp.StringParsers.Regex("\\s*");
 
+// boolean
+const bool = lxp.StringParsers.Regex("(true|false)", "i")
+  .map(res => new ParserResult(
+    TokenKind.Boolean, 
+    res.toLowerCase() === "true"
+    // res
+  ));
+
 // number
 const num = lxp.NumberParsers.integer
   .map(res => new ParserResult(
@@ -79,11 +87,11 @@ const closeParan = Str(')').map(res => new ParserResult(
 // formula arguments
 const formulaOperandParser = nestedEq.chain((res) => {
   return new lx.Parser((state) => {
-    if(res == ''){
+    if (res == '') {
       return lx.StateUtils.withResult(state, new ParserResult(TokenKind.None, ''));
     }
     const innerEqRes = CalcParser.instance.run(res);
-    if(innerEqRes.isError){
+    if (innerEqRes.isError) {
       return lx.StateUtils.withError(state, innerEqRes.err);
     }
     return lx.StateUtils.withResult(state, innerEqRes.result);
@@ -104,6 +112,7 @@ const formulaParser = lx.Sequence([
 
 const operand = lx.Choice([
   formulaParser,
+  bool,
   cellRange,
   cellRef,
   varname,
@@ -121,7 +130,7 @@ const eq = lx.SeptBy(lx.Choice([
 
 export class CalcParser {
 
-  private constructor(){}
+  private constructor() { }
 
   private _opPriority = {
     '+': 2,
@@ -286,7 +295,7 @@ export class CalcParser {
 
   private static _instance: CalcParser;
   static get instance() {
-    if(!CalcParser._instance){
+    if (!CalcParser._instance) {
       CalcParser._instance = new CalcParser();
     }
     return CalcParser._instance;

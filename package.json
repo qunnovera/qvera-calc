@@ -33,6 +33,6 @@
     "typescript"
   ],
   "dependencies": {
-    "@sharadt/lexicons": "^0.1.2"
+    "@sharadt/lexicons": "^0.1.4"
   }
 }

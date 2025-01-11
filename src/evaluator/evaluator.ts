@@ -1,6 +1,6 @@
 import { IDataStore } from "./data-store.interface";
 import { CellRange, CellRef, ParserResult, TokenKind } from "../parser"
-import { isNumber } from "../utils/data-type.util";
+import { isBoolean, isNumber } from "../utils/data-type.util";
 import { CalcError, ErrorKind } from "./calc-error";
 import { IFormulaManager } from "./formula-manager.interface";
 
@@ -29,6 +29,10 @@ export class ExpEvaluator {
       // empty formula argument
       case TokenKind.None: {
         return undefined;
+      }
+      // boolean
+      case TokenKind.Boolean: {
+        return node.value;
       }
       // number
       case TokenKind.Integer:
@@ -114,15 +118,23 @@ export class ExpEvaluator {
   // evalue binary operator node
   private _evaluateBinaryOperator(node: ParserResult, ctx: IEvalContext) {
     // eval left node
-    const res1 = this._evaluateNode(node.childs[0], ctx);
+    let res1 = this._evaluateNode(node.childs[0], ctx);
     if(res1 instanceof CalcError){
       return res1;
     }
 
     // eval right node
-    const res2 = this._evaluateNode(node.childs[1], ctx);
+    let res2 = this._evaluateNode(node.childs[1], ctx);
     if(res2 instanceof CalcError){
       return res2;
+    }
+
+    // convert bool to int
+    if(isBoolean(res1)){
+      res1 = +res1;
+    }
+    if(isBoolean(res2)){
+      res2 = +res2;
     }
 
     // check data types
@@ -154,9 +166,13 @@ export class ExpEvaluator {
 
   // evaluate value for uniary operator
   private _evaluateUniaryOperator(node: ParserResult, ctx: IEvalContext) {
-    const res = this._evaluateNode(node.childs[0], ctx);
+    let res = this._evaluateNode(node.childs[0], ctx);
     if(res instanceof CalcError){
       return res;
+    }
+
+    if(isBoolean(res)){
+      res = +res;
     }
 
     if(!isNumber(res)){
