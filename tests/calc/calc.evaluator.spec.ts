@@ -47,9 +47,11 @@ describe("Test calc engine", () => {
     expect(calc.eval('"3" - 5')).toBe(-2);
     expect(calc.eval('+"3"')).toBe("3");
     expect(calc.eval('-"3"')).toBe(-3);
+    expect(calc.eval('"ab"&"cd"')).toBe("abcd");
     // error with string operations
     let res = calc.eval('"a"-"3"')
     expect(res instanceof CalcError).toBe(true);
     expect(res.kind).toBe(ErrorKind.Value);
   });
+
 });

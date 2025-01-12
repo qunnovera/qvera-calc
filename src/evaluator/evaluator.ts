@@ -47,6 +47,10 @@ export class ExpEvaluator {
       case TokenKind.UniaryOperator: {
         return this._evaluateUniaryOperator(node, ctx);
       }
+      // logical operator
+      case TokenKind.LogicalOperator: {
+        return this._evaluateLogicalOperator(node, ctx);
+      }
       // binary operator
       case TokenKind.Operator: {
         return this._evaluateBinaryOperator(node, ctx);
@@ -119,6 +123,60 @@ export class ExpEvaluator {
     return val;
   }
 
+  // evaluate logical operators
+  private _evaluateLogicalOperator(node: ParserResult, ctx: IEvalContext) {
+    // eval left node
+    let res1 = this._evaluateNode(node.childs[0], ctx);
+    if(res1 instanceof CalcError){
+      return res1;
+    }
+
+    // eval right node
+    let res2 = this._evaluateNode(node.childs[1], ctx);
+    if(res2 instanceof CalcError){
+      return res2;
+    }
+
+    // assign data type val
+    if(typeof res1 != typeof res2){
+      if(isString(res1)){
+        res1 = 2;
+      }else if(isNumber(res1)){
+        res1 = 1;
+      }else if(isBoolean(res1)){
+        res1 = res1 == true ? 4: 3;
+      }
+
+      if(isString(res2)){
+        res2 = 2;
+      }else if(isNumber(res2)){
+        res2 = 1;
+      }else if(isBoolean(res2)){
+        res2 = res2 == true ? 4: 3;
+      }
+    }
+
+    switch(node.value){
+      case '<': {
+        return res1 < res2;
+      }
+      case '<=': {
+        return res1 < res2;
+      }
+      case '=': {
+        return res1 === res2;
+      }
+      case '>': {
+        return res1 > res2;
+      }
+      case '>=': {
+        return res1 >= res2;
+      }
+    }
+
+    return new CalcError(ErrorKind.Value);
+  }
+
   // evalue binary operator node
   private _evaluateBinaryOperator(node: ParserResult, ctx: IEvalContext) {
     // eval left node
@@ -131,6 +189,15 @@ export class ExpEvaluator {
     let res2 = this._evaluateNode(node.childs[1], ctx);
     if(res2 instanceof CalcError){
       return res2;
+    }
+
+    // for & operator
+    if(node.value === "&") {
+      if(!isString(res1) || !isString(res2)){
+        return new CalcError(ErrorKind.Value);
+      }
+
+      return res1 + res2;
     }
 
     // convert bool/string to int

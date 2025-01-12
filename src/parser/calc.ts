@@ -73,11 +73,27 @@ const cellRange = lx.Sequence([
 
 // operators
 const operator = lx.Choice(
-  [Str('+'), Str('-'), Str('*'), Str('/')]
-).map(res => new ParserResult(
-  TokenKind.Operator,
-  res
-));
+  [Str('+'), Str('-'), Str('*'), Str('/') , Str('&'), Str('>='), Str('<='), Str('>'), Str('<'), Str('=')]
+).map(res => {
+  switch(res){
+    case '>=':
+    case '<=':
+    case '>':
+    case '=':
+    case '<': {
+      return new ParserResult(
+        TokenKind.LogicalOperator,
+        res
+      )
+    }
+    default: {
+      return new ParserResult(
+        TokenKind.Operator,
+        res
+      )
+    }
+  }
+});
 
 // open paran
 const openParan = Str('(').map(res => new ParserResult(
@@ -149,6 +165,11 @@ export class CalcParser {
   private constructor() { }
 
   private _opPriority = {
+    '>': 1,
+    '>=': 1,
+    '<': 1,
+    '<=': 1,
+    '=': 1,
     '+': 2,
     '-': 2,
     '*': 3,
@@ -191,7 +212,7 @@ export class CalcParser {
         }
         cur.childs.push(stack.pop());
         stack.push(cur);
-      } else if (cur.kind === TokenKind.Operator) {
+      } else if (cur.kind === TokenKind.Operator || cur.kind === TokenKind.LogicalOperator) {
         if (stack.length < 2) {
           throw `Cannot get enough arguments for ${cur.value}`;
         }
@@ -259,6 +280,7 @@ export class CalcParser {
         }
 
         case TokenKind.Operator:
+        case TokenKind.LogicalOperator:
         case TokenKind.UniaryOperator: {
           // push conditions, stack is empty, current scanned is high priority, or stack top is open paren
           if (!opStack.length) {

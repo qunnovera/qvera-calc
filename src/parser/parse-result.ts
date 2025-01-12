@@ -9,6 +9,7 @@ export enum TokenKind {
   CellRange,
   Operator,
   UniaryOperator,
+  LogicalOperator,
   OpenParan,
   CloseParan,
   InnerExpression,
