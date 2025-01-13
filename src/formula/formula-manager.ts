@@ -1,3 +1,4 @@
+import { ICustomFormula } from './custom-formula.interface';
 import { IFormula, IFormulaManager } from '../evaluator';
 import * as excelFormulas from './excel';
 
@@ -21,15 +22,28 @@ export class FormulaManager implements IFormulaManager {
   }
 
   // register new formula
-  registerFormula(formula: IFormula, overrideExisting: boolean = false): boolean {
+  registerFormula(formula: ICustomFormula, overrideExisting: boolean = false): boolean {
     const name = formula.name.toLowerCase();
     if(!overrideExisting && this._formulas[name]){
       return false;
     }
 
-    this._formulas[name] = formula;
+    this._formulas[name] = this._getFormulaObj(formula);
 
     return true;
+  }
+
+  _getFormulaObj(formulaInfo: ICustomFormula): IFormula {
+    let res: IFormula = {
+      name: '',
+      minArgs: 0,
+      maxArgs: Infinity,
+      acceptsError: false,
+      acceptsRef: false,
+      ...formulaInfo
+    };
+
+    return res;
   }
 
   // check if formula exists in formula manager

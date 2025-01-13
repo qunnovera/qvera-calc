@@ -3,7 +3,8 @@ export enum ErrorKind {
   DivideByZero,
   Name,
   NotImplemented,
-  Parse
+  Parse,
+  Custom
 }
 
 export class CalcError {
