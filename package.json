@@ -5,6 +5,7 @@
   "scripts": {
     "build": "ts-node tools/build.ts",
     "push": "ts-node tools/publish.ts",
+    "bmk": "ts-node tools/bmk.ts",
     "build:dev": "tsc -b",
     "clean": "ts-node tools/clean.ts",
     "test": "jest"

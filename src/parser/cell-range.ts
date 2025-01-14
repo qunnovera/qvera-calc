@@ -108,7 +108,7 @@ export class CellRange {
     if(this._c < 0 || this._c2 < 0){
       return -1;
     }
-    return Math.abs(this._c - this._c2);
+    return Math.abs(this._c - this._c2) + 1;
   }
 
   get topRow(){

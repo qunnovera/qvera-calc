@@ -19,11 +19,14 @@ export const nestedEq = new lx.Parser((state) => {
       openParanCount--;
     }
 
-
     result += state.inputString[i];
   }
 
   result = result.trim();
+
+  if(!result && state.inputString[i] !== ',' && state.inputString[i-1] === '('){
+    return lx.StateUtils.withError(state, 'Unexpected end of input');
+  }
 
   return lx.StateUtils.updateResult(state, result, i);
 });

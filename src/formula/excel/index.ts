@@ -1,1 +1,3 @@
-export * from "./sum.formula";
+export * from "./maths";
+export * from "./statics";
+export * from "./text";

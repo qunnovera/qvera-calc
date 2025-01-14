@@ -83,8 +83,7 @@ export class SimpleDataStore implements IDataStore {
       return [];
     }
 
-    const data = d
-    return [];
+    return (d as any[]).slice(r, r+rc).map(row => (row || []).slice(c, c + cc));
   }
 
 }

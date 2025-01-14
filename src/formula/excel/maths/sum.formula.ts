@@ -1,5 +1,5 @@
-import { IEvalContext, IFormula, CalcError, ErrorKind } from "../../evaluator";
-import { isArray, isBoolean, isNumber } from "../../utils";
+import { IEvalContext, IFormula, CalcError, ErrorKind } from "../../../evaluator";
+import { isArray, isBoolean, isNumber } from "../../../utils";
 
 // excel sum formula
 export const SUM: IFormula  = {

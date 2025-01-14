@@ -97,6 +97,10 @@ export class ExpEvaluator {
     }
 
     const formula = this.formulaManager.getFormula(node.value);
+    // mismatch argument count
+    if(node.childs.length < formula.minArgs || node.childs.length > formula.maxArgs){
+      return new CalcError(ErrorKind.Value);
+    }
     if (formula.acceptsRef) {
       return formula.evaluate(node.childs, ctx);
     } else {
