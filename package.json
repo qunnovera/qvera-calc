@@ -1,6 +1,6 @@
 {
   "name": "@sharadt/numfy",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "index.js",
   "scripts": {
     "build": "ts-node tools/build.ts",
