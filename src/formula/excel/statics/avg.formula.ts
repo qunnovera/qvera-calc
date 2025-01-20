@@ -1,5 +1,7 @@
-import { IEvalContext, IFormula, CalcError, ErrorKind } from "../../../evaluator";
-import { isArray, isBoolean, isNumber } from "../../../utils";
+import { CalcError, ErrorKind } from "../../../evaluator/calc-error";
+import { IEvalContext } from "../../../evaluator/evaluator";
+import { IFormula } from "../../../evaluator/formula-manager.interface";
+import { isArray, isBoolean, isNumber } from "../../../utils/data-type.util";
 
 // excel avg formula
 export const AVG: IFormula  = {

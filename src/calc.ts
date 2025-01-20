@@ -1,8 +1,9 @@
 import { IParserState } from "@sharadt/lexicons";
-import { SimpleDataStore } from "./datastore";
-import { CalcError, ErrorKind, ExpEvaluator, IEvalContext } from "./evaluator";
-import { FormulaManager } from "./formula";
-import { CalcParser } from "./parser";
+import { SimpleDataStore } from "./datastore/simple-data-store";
+import { FormulaManager } from "./formula/formula";
+import { ExpEvaluator, IEvalContext } from "./evaluator/evaluator";
+import { CalcParser } from "./parser/calc";
+import { CalcError, ErrorKind } from "./evaluator/calc-error";
 
 // calculation engine
 export class CalcEngine {

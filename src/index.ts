@@ -1,3 +1,3 @@
-import {CalcParser} from './parser/calc';
+export {CalcEngine} from './calc';
 
 

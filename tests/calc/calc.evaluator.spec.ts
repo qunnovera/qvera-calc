@@ -1,5 +1,5 @@
 import { CalcEngine } from "../../src/calc";
-import { CalcError, ErrorKind } from "../../src/evaluator";
+import { CalcError, ErrorKind } from "../../src/evaluator/calc-error";
 
 const calc = new CalcEngine();
 calc.dataStore.setVariableValue("a", 5);

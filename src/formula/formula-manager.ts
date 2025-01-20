@@ -1,6 +1,6 @@
+import { IFormula, IFormulaManager } from '../evaluator/formula-manager.interface';
 import { ICustomFormula } from './custom-formula.interface';
-import { IFormula, IFormulaManager } from '../evaluator';
-import * as excelFormulas from './excel';
+import { excelFormulas } from './formula';
 
 export class FormulaManager implements IFormulaManager {
 

@@ -1,6 +1,6 @@
 import { CalcEngine } from "../../../src/calc";
-import { CalcError, ErrorKind } from "../../../src/evaluator";
-import { isArray } from "../../../src/utils";
+import { CalcError } from "../../../src/evaluator/calc-error";
+import { isArray } from "../../../src/utils/data-type.util";
 
 const calc = new CalcEngine();
 calc.dataStore.setVariableValue("a", 5);

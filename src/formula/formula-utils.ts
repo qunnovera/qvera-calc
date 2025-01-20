@@ -1,4 +1,4 @@
-import { isArray } from "../utils";
+import { isArray } from "../utils/data-type.util";
 
 /**
  * flattens list of argument to 1D array

@@ -1,4 +1,4 @@
-import { indexToLetter, letterToIndex } from "../utils";
+import { indexToLetter, letterToIndex } from "../utils/util";
 
 export class CellRef {
   _r: number = -1;

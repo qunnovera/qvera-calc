@@ -1,9 +1,10 @@
 import { IDataStore } from "./data-store.interface";
-import { CellRange, CellRef, ParserResult, TokenKind } from "../parser"
 import { isBoolean, isNumber, isString } from "../utils/data-type.util";
 import { CalcError, ErrorKind } from "./calc-error";
 import { IFormulaManager } from "./formula-manager.interface";
 import { AsyncResult } from "./async-result";
+import { ParserResult, TokenKind } from "../parser/parse-result";
+import { CellRange, CellRef } from "../parser/cell-range";
 
 export interface IEvalContext {
   evaluator: ExpEvaluator;

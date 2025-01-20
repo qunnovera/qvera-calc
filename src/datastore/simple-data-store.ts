@@ -1,6 +1,6 @@
-import { IDataStore } from "../evaluator";
-import { CellRef } from "../parser";
-import { getScopedValue, setScopedValue } from "../utils";
+import { IDataStore } from "../evaluator/data-store.interface";
+import { CellRef } from "../parser/cell-range";
+import { getScopedValue, setScopedValue } from "../utils/util";
 
 export class SimpleDataStore implements IDataStore {
 

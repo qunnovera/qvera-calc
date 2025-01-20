@@ -1,6 +1,7 @@
 import { CalcEngine } from "../../src/calc";
-import { CalcError, ErrorKind, IEvalContext } from "../../src/evaluator";
 import { AsyncResult } from "../../src/evaluator/async-result";
+import { CalcError, ErrorKind } from "../../src/evaluator/calc-error";
+import { IEvalContext } from "../../src/evaluator/evaluator";
 
 const calc = new CalcEngine();
 calc.dataStore.setVariableValue("a", 5);

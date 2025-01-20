@@ -1,4 +1,4 @@
-import {indexToLetter, letterToIndex} from "../../src/utils";
+import { indexToLetter, letterToIndex } from "../../src/utils/util";
 
 
 describe("test letter to index", () => {

@@ -1,4 +1,4 @@
-import { IEvalContext } from "../evaluator";
+import { IEvalContext } from "../evaluator/evaluator";
 
 export interface ICustomFormula {
   name: string;

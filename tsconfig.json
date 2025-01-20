@@ -1,21 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "references": [
-    {
-      "path": "./src/datastore",
-    },
-    {
-      "path": "./src/parser",
-    },
-    {
-      "path": "./src/utils",
-    },
-    {
-      "path": "./src/evaluator",
-    },
-    {
-      "path": "./src/formula",
-    }
   ],
   "compilerOptions": {
     "outDir": "./dist",
@@ -23,6 +8,6 @@
     "types": ["node"]
   },
   "include": [
-    "src/*.ts"
+    "src/**/*.ts"
   ]
 }

@@ -1,4 +1,4 @@
-import { ParserResult } from "../parser";
+import { ParserResult } from "../parser/parse-result";
 
 interface INameInfo {
   name: string;
