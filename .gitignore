@@ -2,5 +2,5 @@ node_modules
 npm_local
 *.tsbuildinfo
 dist
-
+npm-local
 

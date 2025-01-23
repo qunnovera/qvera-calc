@@ -3,7 +3,7 @@
   "references": [
   ],
   "compilerOptions": {
-    "outDir": "./npm-local/node_modules/@sharadt/numfy",
+    "outDir": "./dist",
     "rootDir": "./src",
     "types": ["node"]
   },

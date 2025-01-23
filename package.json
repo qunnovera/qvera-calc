@@ -3,10 +3,9 @@
   "version": "0.1.4",
   "main": "index.js",
   "scripts": {
+    "build:prod": "ts-node tools/build.ts prod",
     "build": "ts-node tools/build.ts",
     "push": "ts-node tools/publish.ts",
-    "bmk": "ts-node tools/bmk.ts",
-    "build:dev": "tsc -b",
     "clean": "ts-node tools/clean.ts",
     "test": "jest"
   },

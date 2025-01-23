@@ -14,7 +14,7 @@ child_process.execSync(
 
 // build
 child_process.execSync(
-  `ts-node tools/build.ts`, 
+  `ts-node tools/build.ts prod`, 
   {
     cwd: projectRoot, 
     stdio:[0,1,2]
