@@ -4,11 +4,12 @@ import { FormulaManager } from "./formula/formula";
 import { ExpEvaluator, IEvalContext } from "./evaluator/evaluator";
 import { CalcParser } from "./parser/calc";
 import { CalcError, ErrorKind } from "./evaluator/calc-error";
+import { IDataStore } from "./evaluator/data-store.interface";
 
 // calculation engine
 export class CalcEngine {
 
-  dataStore = new SimpleDataStore();
+  dataStore: IDataStore = new SimpleDataStore();
   formulaManager = new FormulaManager();
   evaluator = new ExpEvaluator(this.formulaManager);
   parser = CalcParser.instance;

@@ -1,5 +1,4 @@
 import * as lx from "@sharadt/lexicons";
-import * as lxp from "@sharadt/lexicons/parsers";
 import { ParserResult, TokenKind } from "./parse-result";
 import { CellRange, CellRef } from "./cell-range";
 import { Str } from "./util/str.parser";
@@ -8,19 +7,19 @@ import { ManySept } from "./util/many-sept.parser";
 import { strValue } from "./util/str-value.parser";
 
 // letters
-const letters = lxp.StringParsers.alphabets;
+const letters = lx.StringParsers.alphabets;
 
 // digits
-const digits = lxp.StringParsers.Regex("\\d+");
+const digits = lx.StringParsers.Regex("\\d+");
 
 // space
-const space = lxp.StringParsers.Regex("\\s+");
+const space = lx.StringParsers.Regex("\\s+");
 
 // optional space
-const oSpace = lxp.StringParsers.Regex("\\s*");
+const oSpace = lx.StringParsers.Regex("\\s*");
 
 // boolean
-const bool = lxp.StringParsers.Regex("(true|false)", "i")
+const bool = lx.StringParsers.Regex("(true|false)", "i")
   .map(res => new ParserResult(
     TokenKind.Boolean,
     res.toLowerCase() === "true"
@@ -34,21 +33,21 @@ const strDataType = strValue
   ));
 
 // number
-const num = lxp.NumberParsers.integer
+const num = lx.NumberParsers.integer
   .map(res => new ParserResult(
     TokenKind.Integer,
     parseInt(res)
   ));
 
 // float
-const float = lxp.NumberParsers.float
+const float = lx.NumberParsers.float
   .map(res => new ParserResult(
     TokenKind.Float,
     parseFloat(res)
   ));
 
 // varname, start with letter and may contain only letters and digits
-const varname = lxp.StringParsers.Regex("[a-zA-Z]+[\\w\\d]*")
+const varname = lx.StringParsers.Regex("[a-zA-Z]+[\\w\\d]*")
   .map(res => new ParserResult(
     TokenKind.VarName,
     res
@@ -125,7 +124,7 @@ const formulaOperandParser = nestedEq.chain((res) => {
 const formulaParser = lx.Sequence([
   varname,
   openParan,
-  ManySept(formulaOperandParser, lxp.StringParsers.Regex('^\\s*,\\s*')),
+  ManySept(formulaOperandParser, lx.StringParsers.Regex('^\\s*,\\s*')),
   closeParan
 ]).map(res => new ParserResult(
   TokenKind.Formula,

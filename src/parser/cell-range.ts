@@ -8,62 +8,62 @@ export class CellRef {
 
   private _name: string;
 
-  get row(){
+  get row() {
     return this._r;
   }
 
-  get column(){
+  get column() {
     return this._c;
   }
 
-  get rowRelative(){
+  get rowRelative() {
     return this._rRelative;
   }
 
-  get colRelative(){
+  get colRelative() {
     return this._cRelative;
   }
 
-  get isValid(){
+  get isValid() {
     return this._r >= 0 && this._c >= 0;
   }
 
-  get name(){
+  get name() {
     this._ensureName();
     return this._name;
   }
 
-  constructor(r: number, c: number, rowRelative: boolean = true, colRelative: boolean = true){
+  constructor(r: number, c: number, rowRelative: boolean = true, colRelative: boolean = true) {
     this._r = r;
     this._c = c;
     this._rRelative = rowRelative;
     this._cRelative = colRelative;
   }
 
-  private _ensureName(){
-    if(!this._name){
+  private _ensureName() {
+    if (!this._name) {
       let name = "";
-      if(!this.colRelative){
+      if (!this.colRelative) {
         name += "$"
       }
-      if(this.column > -1){
+      if (this.column > -1) {
         name += indexToLetter(this.column);
       }
-      if(!this.rowRelative){
+      if (!this.rowRelative) {
         name += "$"
       }
-      if(this.row > -1){
+      if (this.row > -1) {
         name += (this.row + 1);
       }
       this._name = name;
     }
   }
 
-  static fromCellName(name: string){
+  static fromCellName(name: string) {
     const rgx = /^(\$?)([a-zA-Z]+)(\$?)([0-9]*)$/;
     const res = rgx.exec(name);
 
-    if(!res){
+    if (!res) {
       return new CellRef(-1, -1);
     }
 
@@ -78,10 +78,10 @@ export class CellRange {
   _c2: number = -1;
   _rRelative: boolean = true;
   _cRelative: boolean = true;
-  
+
   private _name: string;
 
-  get row(){
+  get row() {
     return this._r;
   }
 
@@ -89,76 +89,76 @@ export class CellRange {
     return this._c;
   }
 
-  get row2(){
+  get row2() {
     return this._r2;
   }
 
-  get col2(){
+  get col2() {
     return this._c2;
   }
 
-  get rowCount(){
-    if(this._r < 0 || this._r2 < 0){
+  get rowCount() {
+    if (this._r < 0 || this._r2 < 0) {
       return -1;
     }
     return Math.abs(this._r - this._r2) + 1;
   }
 
-  get columnCount(){
-    if(this._c < 0 || this._c2 < 0){
+  get columnCount() {
+    if (this._c < 0 || this._c2 < 0) {
       return -1;
     }
     return Math.abs(this._c - this._c2) + 1;
   }
 
-  get topRow(){
+  get topRow() {
     return Math.min(this._r, this._r2);
   }
 
-  get bottomRow(){
-    return Math.max(this._r + this._r2);
+  get bottomRow() {
+    return Math.max(this._r, this._r2);
   }
 
-  get leftCol(){
+  get leftCol() {
     return Math.min(this._c, this._c2);
   }
 
-  get rightCol(){
+  get rightCol() {
     return Math.max(this._c, this._c2);
   }
 
-  get rowRelative(){
+  get rowRelative() {
     return this._rRelative;
   }
 
-  get colRelative(){
+  get colRelative() {
     return this._cRelative;
   }
 
-  get isValid(){
+  get isValid() {
     // if any of the row/col is negative but not the other one
     // then range is invalid
     let rc = 0, cc = 0;
-    if(this._r < 0){
+    if (this._r < 0) {
       rc++
     }
-    if(this._r2 < 0){
+    if (this._r2 < 0) {
       rc++;
     }
-    if(this._c < 0){
+    if (this._c < 0) {
       cc++;
     }
-    if(this._c2 < 0){
+    if (this._c2 < 0) {
       cc++;
     }
     return rc != 1 && cc != 1;
   }
 
-  constructor(r: number, c: number, r2?: number, c2?: number, rowRelative: boolean = true, colRelative: boolean = true){
-    if(r2 == null){
+  constructor(r: number, c: number, r2?: number, c2?: number, rowRelative: boolean = true, colRelative: boolean = true) {
+    if (r2 == null) {
       r2 = r;
     }
-    if(c2 == null){
+    if (c2 == null) {
       c2 = c;
     }
 
@@ -170,7 +170,32 @@ export class CellRange {
     this._cRelative = colRelative;
   }
 
-  static fromCellRef(cellRef1: CellRef, cellRef2: CellRef){
+  private _containsRow(r: number){
+    
+  }
+
+  private _containsCol(c: number){
+
+  }
+
+  contains(r: number, c: number) {
+    if (
+      r < this.topRow ||
+      ((r > this.bottomRow) && (this.bottomRow >= 0)) ||
+      c < this.leftCol ||
+      ((c > this.rightCol) && (this.rightCol >= 0))
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  containsRef(ref: CellRef) {
+    return this.contains(ref.row, ref.column);
+  }
+
+  static fromCellRef(cellRef1: CellRef, cellRef2: CellRef) {
     return new CellRange(cellRef1.row, cellRef1.column, cellRef2.row, cellRef2.column, cellRef1.rowRelative || cellRef2.rowRelative, cellRef1.colRelative || cellRef2.colRelative);
   }
 
