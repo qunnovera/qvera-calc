@@ -9,3 +9,5 @@ export interface ICustomFormula {
 
   evaluate(args: any[], ctx: IEvalContext): any;
 }
+
+export const ____testval = "";
