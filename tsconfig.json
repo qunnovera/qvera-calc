@@ -3,7 +3,7 @@
   "references": [
   ],
   "compilerOptions": {
-    "outDir": "./npm-local/node_modules/@sharadt/numfy",
+    "outDir": "./npm-local/node_modules/@qunnovera/numfy",
     "rootDir": "./src",
     "types": ["node"]
   },

@@ -6,7 +6,7 @@ const projectRoot = path.join(__dirname, './..');
 
 const isProd =  process.argv[2] && process.argv[2] == "prod";
 let tsFile = '';
-let outDir = path.join(projectRoot, 'npm-local/node_modules/@sharadt/numfy');
+let outDir = path.join(projectRoot, 'npm-local/node_modules/@qunnovera/numfy');
 // prod build
 if(isProd){
   outDir = path.join(projectRoot, 'dist');
