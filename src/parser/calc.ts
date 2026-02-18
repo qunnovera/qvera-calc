@@ -185,6 +185,9 @@ export class CalcParser {
 
     // get tokens arr
     const tokensArr: ParserResult[] = pState.result;
+    if (!tokensArr || tokensArr.length === 0) {
+      return lx.StateUtils.withError(pState, 'Empty expression');
+    }
     // detect uniary operators
     this._detectAndUpdateUniaryOperators(tokensArr);
     // convert to postfix

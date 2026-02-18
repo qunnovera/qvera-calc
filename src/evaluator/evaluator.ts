@@ -227,7 +227,7 @@ export class ExpEvaluator {
           return res1 < res2;
         }
         case '<=': {
-          return res1 < res2;
+          return res1 <= res2;
         }
         case '=': {
           return res1 === res2;

@@ -12,7 +12,7 @@ calc.dataStore.setCellValueByName("a3", 3);
 calc.dataStore.setCellValueByName("a4", 3);
 calc.dataStore.setCellValueByName("a5", 3);
 
-describe("Test upper formula", () => {
+describe("Test lower formula", () => {
   test("can work with int values", () => {
     const res = calc.eval("LOWER(2)");
     expect(res).toBe("2");
