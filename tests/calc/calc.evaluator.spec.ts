@@ -1,12 +1,14 @@
 import { describe, test, expect } from "bun:test";
 import { CalcEngine } from "../../src/calc";
 import { CalcError, ErrorKind } from "../../src/evaluator/calc-error";
+import { SimpleDataStore } from "../../src/datastore/simple-data-store";
 
 const calc = new CalcEngine();
-calc.dataStore.setVariableValue("a", 5);
-calc.dataStore.setVariableValue("b", 8);
-calc.dataStore.setCellValueByName("a1", 3);
-calc.dataStore.setCellValueByName("a5", 7);
+const dataStore = calc.dataStore as SimpleDataStore;
+dataStore.setVariableValue("a", 5);
+dataStore.setVariableValue("b", 8);
+dataStore.setCellValueByName("a1", 3);
+dataStore.setCellValueByName("a5", 7);
 
 describe("Test calc engine", () => {
   test("can evaluate simple equations correctly", () => {
