@@ -13,8 +13,4 @@ describe("NameManager", () => {
     expect(nm.hasName("myName", "sheet1")).toBe(false);
   });
 
-  // Note: NameManager currently has no public method to add names,
-  // so we can only test the empty-state behavior.
-  // When a public register/add method is added, expand these tests.
-
 });
