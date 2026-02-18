@@ -1,3 +1,4 @@
+import { describe, test, expect } from "bun:test";
 import { CalcEngine } from "../../../src/calc";
 import { CalcError } from "../../../src/evaluator/calc-error";
 import { isArray } from "../../../src/utils/data-type.util";

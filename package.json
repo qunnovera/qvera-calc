@@ -2,23 +2,20 @@
   "name": "@qunnovera/numfy",
   "version": "0.1.4",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "build:prod": "ts-node tools/build.ts prod",
-    "build": "ts-node tools/build.ts",
-    "push": "ts-node tools/publish.ts",
-    "clean": "ts-node tools/clean.ts",
-    "test": "jest"
+    "dev": "tsc -p tsconfig.dev.json && bun tools/build.ts copy-assets --dev",
+    "build": "tsc -p tsconfig.build.json && bun tools/build.ts copy-assets",
+    "clean": "bun tools/clean.ts",
+    "release": "bun run clean && bun run build && bun tools/publish.ts",
+    "test": "bun test"
   },
   "author": "sharad <sharadtomer@outlook.com>",
   "license": "MIT",
   "homepage": "https://github.com/sharadtomer/numfy",
   "description": "Complete excel like formula engine",
   "devDependencies": {
-    "@types/jest": "^29.5.13",
-    "@types/node": "^22.7.7",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2",
+    "@types/bun": "latest",
     "typescript": "^5.6.3"
   },
   "publishConfig": {

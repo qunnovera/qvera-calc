@@ -1,3 +1,4 @@
+import { describe, test, expect } from "bun:test";
 import { CalcEngine } from "../../src/calc";
 import { AsyncResult } from "../../src/evaluator/async-result";
 import { CalcError, ErrorKind } from "../../src/evaluator/calc-error";

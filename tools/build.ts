@@ -1,35 +1,18 @@
-import * as child_process from 'child_process';
-import path from 'path';
-import * as fs from 'fs';
+import { copyFileSync, mkdirSync } from "fs";
+import { join } from "path";
 
-const projectRoot = path.join(__dirname, './..');
+const cmd = process.argv[2];
+const isDev = process.argv.includes("--dev");
+const outDir = isDev ? "npm-local/node_modules/@qunnovera/numfy" : "dist";
 
-const isProd =  process.argv[2] && process.argv[2] == "prod";
-let tsFile = '';
-let outDir = path.join(projectRoot, 'npm-local/node_modules/@qunnovera/numfy');
-// prod build
-if(isProd){
-  outDir = path.join(projectRoot, 'dist');
-  tsFile += ' -f tsconfig.prod.json';
+switch (cmd) {
+  case "copy-assets":
+    mkdirSync(outDir, { recursive: true });
+    copyFileSync("package.json", join(outDir, "package.json"));
+    copyFileSync("readme.md", join(outDir, "readme.md"));
+    break;
+  default:
+    console.error(`Unknown command: ${cmd}`);
+    process.exit(1);
 }
-
-
-// build project
-child_process.execSync(
-  `tsc -b ${tsFile}`, 
-  {
-    cwd: projectRoot, 
-    stdio:[0,1,2]
-  }
-);
-
-// copy required files
-const filesToCopy = [
-  'package.json',
-  'readme.md'
-];
-
-filesToCopy.forEach(file => {
-  fs.copyFileSync(path.join(projectRoot, file), path.join(outDir, file));
-});
 

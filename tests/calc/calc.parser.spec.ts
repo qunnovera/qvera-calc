@@ -1,3 +1,4 @@
+import { describe, test, expect } from "bun:test";
 import {CalcParser} from "../../src/parser/calc";
 import { TokenKind } from "../../src/parser/parse-result";
 
